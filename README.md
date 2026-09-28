@@ -59,7 +59,7 @@ Launch UNMASK without flags to drop straight into the interactive control center
   [2] 🔍 Static Analysis          (Inspect obfuscation patterns & metrics)
   [3] ⚙️  Syntax & AST Dump        (Validate grammar, view AST / clean code)
   [4] 🛠️  Common IR Tools          (Universal IR optimization / CFG graph)
-  [5] 🌐 Detect Language          (Analyze file signatures & headers)
+  [5] 🏷️  Detect Language          (Analyze file signatures & headers)
   [6] ❌ Terminate Session
 
 unmask@engine:~# 
