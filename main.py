@@ -705,21 +705,20 @@ def print_banner(skip_rain: bool = True) -> None:
     c_reset = "\033[0m" if use_color else ""
 
     banner = f"""{g_hi}
-   ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
-   ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
-   ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
-   ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
-   ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
-    ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
+   __  ___   ____  ______   _____   __ __
+  / / / / | / /  |/  /   | / ___/  / //_/
+ / / / /  |/ / /|_/ / /| | \\__ \\  / ,<   
+/ /_/ / /|  / /  / / ___ |___/ / / /| |  
+\\____/_/ |_/_/  /_/_/  |_/____/ /_/ |_|  {c_reset}
+{g_dim}  ------------------------------------------------------------------------{c_reset}
 {c_white}     UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool{c_reset}
 {c_cyan}                   [ DEVELOPED BY : SAYANTAN ]{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
-  {g_dim}::{c_reset} {c_bold}Target Languages{c_reset} : {g_mid}Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java │ Go{c_reset}
-  {g_dim}::{c_reset} {c_bold}Core Subsystems {c_reset} : {g_mid}AST Simplification │ Control-Flow De-Flattening │ Opaque Pruning{c_reset}
-  {g_dim}::{c_reset} {c_bold}Decoders & Crypto{c_reset}: {g_mid}Base64 │ Hex │ URL │ Multi-Byte XOR │ Zlib/Gzip │ Unicode Unpack{c_reset}
-  {g_dim}::{c_reset} {c_bold}Dynamic Sandbox {c_reset} : {g_mid}Subprocess POSIX Jail │ CPU & RAM Limits │ Step-Capped Tracing{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}"""
+{g_dim}  ------------------------------------------------------------------------{c_reset}
+  {g_dim}::{c_reset} {c_bold}Target Languages{c_reset} : {g_mid}Python 3.11+ | JavaScript (ES2024) | TypeScript | Java | Go{c_reset}
+  {g_dim}::{c_reset} {c_bold}Core Subsystems {c_reset} : {g_mid}AST Simplification | Control-Flow De-Flattening | Opaque Pruning{c_reset}
+  {g_dim}::{c_reset} {c_bold}Decoders & Crypto{c_reset}: {g_mid}Base64 | Hex | URL | Multi-Byte XOR | Zlib/Gzip | Unicode Unpack{c_reset}
+  {g_dim}::{c_reset} {c_bold}Dynamic Sandbox {c_reset} : {g_mid}Subprocess POSIX Jail | CPU & RAM Limits | Step-Capped Tracing{c_reset}
+{g_dim}  ------------------------------------------------------------------------{c_reset}"""
     print(banner)
 
 

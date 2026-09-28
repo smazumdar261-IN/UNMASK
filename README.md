@@ -9,21 +9,20 @@
 </p>
 
 ```text
-   ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
-   ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
-   ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
-   ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
-   ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
-    ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-  ────────────────────────────────────────────────────────────────────────
+   __  ___   ____  ______   _____   __ __
+  / / / / | / /  |/  /   | / ___/  / //_/
+ / / / /  |/ / /|_/ / /| | \__ \  / ,<   
+/ /_/ / /|  / /  / / ___ |___/ / / /| |  
+\____/_/ |_/_/  /_/_/  |_/____/ /_/ |_|  
+  ------------------------------------------------------------------------
      UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool
                    [ DEVELOPED BY : SAYANTAN ]
-  ────────────────────────────────────────────────────────────────────────
-  :: Target Languages : Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java │ Go
-  :: Core Subsystems  : AST Simplification │ Control-Flow De-Flattening │ Opaque Pruning
-  :: Decoders & Crypto: Base64 │ Hex │ URL │ Multi-Byte XOR │ Zlib/Gzip │ Unicode Unpack
-  :: Dynamic Sandbox  : Subprocess POSIX Jail │ CPU & RAM Limits │ Step-Capped Tracing
-  ────────────────────────────────────────────────────────────────────────
+  ------------------------------------------------------------------------
+  :: Target Languages : Python 3.11+ | JavaScript (ES2024) | TypeScript | Java | Go
+  :: Core Subsystems  : AST Simplification | Control-Flow De-Flattening | Opaque Pruning
+  :: Decoders & Crypto: Base64 | Hex | URL | Multi-Byte XOR | Zlib/Gzip | Unicode Unpack
+  :: Dynamic Sandbox  : Subprocess POSIX Jail | CPU & RAM Limits | Step-Capped Tracing
+  ------------------------------------------------------------------------
 ```
 
 ---

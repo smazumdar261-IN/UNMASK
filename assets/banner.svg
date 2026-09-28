@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 310" width="100%">
+  <defs>
+    <linearGradient id="terminalBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0e131a"/>
+      <stop offset="100%" stop-color="#090d13"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Terminal Window Chrome -->
+  <rect x="2" y="2" width="846" height="306" rx="10" fill="url(#terminalBg)" stroke="#30363d" stroke-width="1.5" />
+  
+  <!-- Title bar -->
+  <path d="M 2 12 Q 2 2 12 2 L 838 2 Q 848 2 848 12 L 848 36 L 2 36 Z" fill="#161b22" />
+  <line x1="2" y1="36" x2="848" y2="36" stroke="#21262d" stroke-width="1" />
+  
+  <!-- Buttons -->
+  <circle cx="20" cy="19" r="5.5" fill="#ff5f56" stroke="#e0443e" stroke-width="0.5"/>
+  <circle cx="38" cy="19" r="5.5" fill="#ffbd2e" stroke="#dea123" stroke-width="0.5"/>
+  <circle cx="56" cy="19" r="5.5" fill="#27c93f" stroke="#1aab29" stroke-width="0.5"/>
+  <text x="425" y="24" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle">sayantan@hackersploit: ~/universal-deobfuscator (unmask)</text>
+
+  <!-- Big ASCII Slant UNMASK -->
+  <g font-family="ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" font-weight="900" font-size="17" fill="#00ff66" filter="url(#neonGlow)">
+    <text x="40" y="78">   __  ___   ____  ______   _____   __ __ </text>
+    <text x="40" y="98">  / / / / | / /  |/  /   | / ___/  / //_/ </text>
+    <text x="40" y="118"> / / / /  |/ / /|_/ / /| | \__ \  / ,&lt;    </text>
+    <text x="40" y="138">/ /_/ / /|  / /  / / ___ |___/ / / /| |   </text>
+    <text x="40" y="158">\____/_/ |_/_/  /_/_/  |_/____/ /_/ |_|   </text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="40" y1="178" x2="810" y2="178" stroke="#238636" stroke-width="1" stroke-dasharray="4,3" />
+
+  <!-- Subtitle and attribution -->
+  <text x="425" y="200" fill="#f0f6fc" font-family="ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" font-size="13.5" font-weight="700" text-anchor="middle">UNMASK :: Universal Code Deobfuscator &amp; Reverse Engineering Tool</text>
+  <text x="425" y="220" fill="#58a6ff" font-family="ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" font-size="12.5" font-weight="700" text-anchor="middle">[ DEVELOPED BY : SAYANTAN ]</text>
+
+  <!-- Metadata Subsystems -->
+  <g font-family="ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" font-size="11.5">
+    <text x="40" y="248">
+      <tspan fill="#8b949e">::</tspan> <tspan fill="#f0f6fc" font-weight="700">Target Languages </tspan><tspan fill="#8b949e">:</tspan> <tspan fill="#7ee787">Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java │ Go</tspan>
+    </text>
+    <text x="40" y="268">
+      <tspan fill="#8b949e">::</tspan> <tspan fill="#f0f6fc" font-weight="700">Core Subsystems  </tspan><tspan fill="#8b949e">:</tspan> <tspan fill="#7ee787">AST Simplification │ Control-Flow De-Flattening │ Opaque Pruning</tspan>
+    </text>
+    <text x="40" y="288">
+      <tspan fill="#8b949e">::</tspan> <tspan fill="#f0f6fc" font-weight="700">Decoders &amp; Crypto</tspan><tspan fill="#8b949e">:</tspan> <tspan fill="#7ee787">Base64 │ Hex │ URL │ Multi-Byte XOR │ Zlib/Gzip │ Unicode Unpack</tspan>
+    </text>
+  </g>
+</svg>
