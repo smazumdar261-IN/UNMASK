@@ -3,29 +3,27 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Developed%20By-Sayantan-00ff66?style=for-the-badge&logo=matrix&logoColor=black" alt="Developed by Sayantan" />
   <img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11+" />
-  <img src="https://img.shields.io/badge/Tests-281%20Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests" />
+  <img src="https://img.shields.io/badge/Tests-286%20Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests" />
   <img src="https://img.shields.io/badge/Dependencies-Zero%20(Stdlib%20Only)-success?style=for-the-badge" alt="Zero Dependencies" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT" />
 </p>
 
 ```text
-   01010100 01001000 01000101 00100000 01001101 01000001 01010100 01010010 01001001 01011000
-  ┌───[ SYSTEM : UNMASK v1.0.0 ]───[ DEVELOPED BY : SAYANTAN ]───[ STATUS : ACTIVE ]─────────┐
-  │ 01  10  00  11  01  10  00  11  01  10  00  11  01  10  00  11  01  10  00  11  01  10   │
-  │  ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗   01010100 01001000 01000101     │
-  │  ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝   01001101 01000001 01010100     │
-  │  ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝    >> WAKE UP, OPERATOR...        │
-  │  ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗    >> DEVELOPED BY SAYANTAN       │
-  │  ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗   01000100 01000101 01001111     │
-  │   ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   01000010 01000110 00100001     │
-  │ 10  01  11  00  10  01  11  00  10  01  11  00  10  01  11  00  10  01  11  00  10  01   │
-  └───[ UNIVERSAL CODE REVERSE ENGINEERING & DEOBFUSCATION CONSTRUCT ]───────────────────────┘
-  :: [DEVELOPER]  : Sayantan
-  :: [TARGETS]    : Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java & Bytecode │ Go
-  :: [SUBSYSTEMS] : Control-Flow De-Flattening │ Opaque Branch Pruner │ Symbolic Algebra
-  :: [DECODERS]   : Base64 │ Hex │ URL │ XOR Multi-Byte │ Zlib/Gzip │ Unicode Unpack
-  :: [SANDBOX]    : Subprocess POSIX Jails │ CPU/Memory rlimits │ Step-Capped Tracing
-  ----------------------------------------------------------------------------------------
+   ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
+   ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
+   ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
+   ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
+   ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
+    ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+  ────────────────────────────────────────────────────────────────────────
+     UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool
+                   [ DEVELOPED BY : SAYANTAN ]
+  ────────────────────────────────────────────────────────────────────────
+  :: Target Languages : Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java │ Go
+  :: Core Subsystems  : AST Simplification │ Control-Flow De-Flattening │ Opaque Pruning
+  :: Decoders & Crypto: Base64 │ Hex │ URL │ Multi-Byte XOR │ Zlib/Gzip │ Unicode Unpack
+  :: Dynamic Sandbox  : Subprocess POSIX Jail │ CPU & RAM Limits │ Step-Capped Tracing
+  ────────────────────────────────────────────────────────────────────────
 ```
 
 ---
