@@ -150,7 +150,41 @@ class TestCLI(unittest.TestCase):
         self.assertNotIn("Dead branch that should be removed", out)
         self.assertIn("Universal Deobfuscator Audit Report", out)
 
+    def test_parse_command_output_file(self) -> None:
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            out_file = Path(td) / "out_parse.py"
+            code, out, _ = self.run_cli(["parse", self.simple_sample, "--unparse", "-o", str(out_file)])
+            self.assertEqual(code, 0)
+            self.assertTrue(out_file.exists())
+            self.assertIn("def greeting", out_file.read_text())
 
+    def test_parse_command_show_ast_javascript(self) -> None:
+        js_sample = str(self.samples_dir / "javascript_obfuscated.js")
+        code, out, _ = self.run_cli(["parse", js_sample, "--show-ast"])
+        self.assertEqual(code, 0)
+        self.assertIn("JSProgram", out)
+        self.assertIn("JSVariableDeclaration", out)
+
+    def test_analyze_command_output_file(self) -> None:
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            js_sample = str(self.samples_dir / "javascript_obfuscated.js")
+            out_file = Path(td) / "analysis_out.txt"
+            code, out, _ = self.run_cli(["analyze", js_sample, "-o", str(out_file)])
+            self.assertEqual(code, 0)
+            self.assertTrue(out_file.exists())
+            content = out_file.read_text()
+            self.assertIn("Language: javascript", content)
+            self.assertIn("Decoders", content)
+
+    def test_languages_registry_auto_registration(self) -> None:
+        from languages import registry
+        self.assertIn("python", registry.supported_languages)
+        self.assertIn("javascript", registry.supported_languages)
+        self.assertIn("typescript", registry.supported_languages)
+        self.assertIn("java", registry.supported_languages)
+        self.assertIn("go", registry.supported_languages)
 
 
 if __name__ == "__main__":

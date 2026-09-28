@@ -250,9 +250,10 @@ class SecureSandbox:
                     memory_exceeded=is_mem,
                 )
 
-            # Retrieve results from queue
-            if not result_queue.empty():
-                payload = result_queue.get()
+            # Retrieve results from queue safely without relying on unreliable empty()
+            import queue
+            try:
+                payload = result_queue.get(timeout=0.5)
                 return SandboxResult(
                     success=payload["success"],
                     return_value=payload["return_value"],
@@ -264,6 +265,8 @@ class SecureSandbox:
                     security_violation=payload["security_violation"],
                     details=payload.get("trace_summary", {}),
                 )
+            except (queue.Empty, EOFError, KeyError):
+                pass
 
             return SandboxResult(
                 success=False,

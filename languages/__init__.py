@@ -62,5 +62,21 @@ class LanguageRegistry:
     def supported_languages(self) -> List[str]:
         return list(self._by_name.keys())
 
+    def all_names(self) -> List[str]:
+        """Return list of all registered language names."""
+        return list(self._by_name.keys())
+
 
 registry = LanguageRegistry()
+
+
+def _register_builtin_languages() -> None:
+    """Ensure all built-in language parsers and converters are registered."""
+    import languages.python
+    import languages.javascript
+    import languages.typescript
+    import languages.java
+    import languages.go
+
+
+_register_builtin_languages()

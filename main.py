@@ -42,7 +42,7 @@ def setup_logging(verbose: bool = False, debug: bool = False) -> None:
 
 def detect_command(args: argparse.Namespace) -> int:
     """Detect language of the provided file."""
-    input_path = Path(args.input)
+    input_path = Path(args.input).expanduser()
     if not input_path.exists():
         print(f"Error: File '{args.input}' not found.", file=sys.stderr)
         return 1
@@ -73,7 +73,7 @@ def read_source_file(input_path: Path) -> str:
 
 def parse_command(args: argparse.Namespace) -> int:
     """Parse input file and display syntax validity and regenerated source."""
-    input_path = Path(args.input)
+    input_path = Path(args.input).expanduser()
     if not input_path.exists():
         print(f"Error: File '{args.input}' not found.", file=sys.stderr)
         return 1
@@ -101,17 +101,26 @@ def parse_command(args: argparse.Namespace) -> int:
         tree = lang.parse(source, filename=str(input_path))
         print(f"Successfully parsed '{args.input}' as {lang.name}.")
         if args.show_ast:
+            print("\n--- AST Dump ---")
             import ast
             if isinstance(tree, ast.AST):
-                print("\n--- AST Dump ---")
                 print(ast.dump(tree, indent=2))
+            else:
+                import pprint
+                print(pprint.pformat(tree, indent=2, width=80))
         if args.unparse:
             if lang.name == "typescript" and getattr(args, "target_js", False):
                 regenerated = lang.unparse(tree, target_js=True)
             else:
                 regenerated = lang.unparse(tree)
-            print("\n--- Regenerated Source ---")
-            print(regenerated)
+            if getattr(args, "output", None):
+                out_path = Path(args.output).expanduser()
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(regenerated, encoding="utf-8")
+                print(f"Regenerated source written to '{args.output}'.")
+            else:
+                print("\n--- Regenerated Source ---")
+                print(regenerated)
         return 0
     except ParseError as e:
         print(f"Syntax Error in '{args.input}':\n  {e}", file=sys.stderr)
@@ -125,7 +134,7 @@ def parse_command(args: argparse.Namespace) -> int:
 
 def deobfuscate_command(args: argparse.Namespace) -> int:
     """Execute the deobfuscation pipeline on the target file."""
-    input_path = Path(args.input)
+    input_path = Path(args.input).expanduser()
     if not input_path.exists():
         print(f"Error: File '{args.input}' not found.", file=sys.stderr)
         return 1
@@ -169,7 +178,9 @@ def deobfuscate_command(args: argparse.Namespace) -> int:
             else:
                 output_code = lang.unparse(recovered_ast)
             if args.output:
-                Path(args.output).write_text(output_code, encoding="utf-8")
+                out_path = Path(args.output).expanduser()
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(output_code, encoding="utf-8")
                 print(f"Deobfuscated (via IR) written to {args.output}")
             else:
                 print(output_code)
@@ -269,7 +280,8 @@ def deobfuscate_command(args: argparse.Namespace) -> int:
             output_code = lang.unparse(result)
 
         if args.output:
-            out_path = Path(args.output)
+            out_path = Path(args.output).expanduser()
+            out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_text(output_code, encoding="utf-8")
             print(f"Deobfuscated output written to '{args.output}'.")
         else:
@@ -317,7 +329,7 @@ def deobfuscate_command(args: argparse.Namespace) -> int:
 
 def analyze_command(args: argparse.Namespace) -> int:
     """Analyze input file and display structure, metrics, and detected obfuscation patterns."""
-    input_path = Path(args.input)
+    input_path = Path(args.input).expanduser()
     if not input_path.exists():
         print(f"Error: File '{args.input}' not found.", file=sys.stderr)
         return 1
@@ -344,26 +356,29 @@ def analyze_command(args: argparse.Namespace) -> int:
 
     try:
         tree = lang.parse(source, filename=str(input_path))
-        print(f"File: {args.input}")
-        print(f"Language: {lang.name}")
-        print("Status: Syntax valid")
+        lines = [
+            f"File: {args.input}",
+            f"Language: {lang.name}",
+            "Status: Syntax valid",
+        ]
+
+        from core.provenance import ProvenanceTracker
+        tracker = ProvenanceTracker()
+        patterns = []
 
         if lang.name == "python":
             import ast
-            from core.provenance import ProvenanceTracker
             from passes.decoder_detection import DecoderDetectionPass
             from passes.cff_recovery import ControlFlowFlatteningPass
 
             node_count = sum(1 for _ in ast.walk(tree))
-            print(f"AST Nodes: {node_count}")
+            lines.append(f"AST Nodes: {node_count}")
 
-            tracker = ProvenanceTracker()
             dec_pass = DecoderDetectionPass(filename=str(input_path))
             dec_pass.run(tree, tracker)
             cff_pass = ControlFlowFlatteningPass(filename=str(input_path))
             cff_pass.run(tree, tracker)
 
-            patterns = []
             dec_count = sum(1 for r in tracker.records if r.pass_name == "DecoderDetection")
             if dec_count:
                 patterns.append(f"Decoders ({dec_count} detected)")
@@ -371,12 +386,43 @@ def analyze_command(args: argparse.Namespace) -> int:
             if cff_count:
                 patterns.append(f"Control Flow Flattening ({cff_count} loops)")
 
-            if patterns:
-                print(f"Detected Obfuscation Patterns: {', '.join(patterns)}")
-            else:
-                print("Detected Obfuscation Patterns: None detected via static heuristics")
+        elif lang.name in ("javascript", "typescript"):
+            from languages.javascript.passes import JSDecoderDetectionPass
+            dec_pass = JSDecoderDetectionPass(filename=str(input_path))
+            dec_pass.run(tree, tracker)
+            dec_count = len(tracker.records)
+            if dec_count:
+                patterns.append(f"Decoders ({dec_count} detected)")
+
+        elif lang.name in ("java", "java-bytecode"):
+            from languages.java.passes import JavaDecoderDetectionPass
+            dec_pass = JavaDecoderDetectionPass(filename=str(input_path))
+            dec_pass.run(tree, tracker)
+            dec_count = len(tracker.records)
+            if dec_count:
+                patterns.append(f"Decoders ({dec_count} detected)")
+
+        elif lang.name == "go":
+            from languages.go.passes import GoDecoderDetectionPass
+            dec_pass = GoDecoderDetectionPass(filename=str(input_path))
+            dec_pass.run(tree, tracker)
+            dec_count = len(tracker.records)
+            if dec_count:
+                patterns.append(f"Decoders ({dec_count} detected)")
+
+        if patterns:
+            lines.append(f"Detected Obfuscation Patterns: {', '.join(patterns)}")
         else:
-            print("Detected Obfuscation Patterns: Static pattern analysis completed")
+            lines.append("Detected Obfuscation Patterns: None detected via static heuristics")
+
+        report_text = "\n".join(lines)
+        if getattr(args, "output", None):
+            out_p = Path(args.output).expanduser()
+            out_p.parent.mkdir(parents=True, exist_ok=True)
+            out_p.write_text(report_text, encoding="utf-8")
+            print(f"Analysis written to '{args.output}'.")
+        else:
+            print(report_text)
 
         return 0
     except ParseError as e:
@@ -408,7 +454,7 @@ def report_command(args: argparse.Namespace) -> int:
 
 def ir_command(args: argparse.Namespace) -> int:
     """Translate source file to Common IR, perform IR-level optimization, or view CFG."""
-    input_path = Path(args.input)
+    input_path = Path(args.input).expanduser()
     if not input_path.exists():
         print(f"Error: File '{args.input}' not found.", file=sys.stderr)
         return 1
@@ -456,7 +502,9 @@ def ir_command(args: argparse.Namespace) -> int:
             else:
                 out_code = lang.unparse(recovered)
             if args.output:
-                Path(args.output).write_text(out_code, encoding="utf-8")
+                out_p = Path(args.output).expanduser()
+                out_p.parent.mkdir(parents=True, exist_ok=True)
+                out_p.write_text(out_code, encoding="utf-8")
                 print(f"Roundtripped source written to {args.output}")
             else:
                 print(out_code)
@@ -464,7 +512,9 @@ def ir_command(args: argparse.Namespace) -> int:
 
         ir_dump = pipeline.dump(ir_mod)
         if args.output:
-            Path(args.output).write_text(ir_dump, encoding="utf-8")
+            out_p = Path(args.output).expanduser()
+            out_p.parent.mkdir(parents=True, exist_ok=True)
+            out_p.write_text(ir_dump, encoding="utf-8")
             print(f"IR written to {args.output}")
         else:
             print(ir_dump)
@@ -502,6 +552,7 @@ def build_parser() -> argparse.ArgumentParser:
     # parse
     parse_parser = subparsers.add_parser("parse", help="Parse and validate source file syntax")
     parse_parser.add_argument("input", help="Path to input source file")
+    parse_parser.add_argument("-o", "--output", help="Write regenerated source to specified file")
     parse_parser.add_argument("-l", "--language", help="Explicit language override")
     parse_parser.add_argument("--show-ast", action="store_true", help="Display AST representation")
     parse_parser.add_argument("--unparse", action="store_true", help="Display regenerated source code")
@@ -514,6 +565,7 @@ def build_parser() -> argparse.ArgumentParser:
     # analyze
     analyze_parser = subparsers.add_parser("analyze", help="Analyze code structure and detect obfuscation patterns")
     analyze_parser.add_argument("input", help="Path to input source file")
+    analyze_parser.add_argument("-o", "--output", help="Write analysis report to specified file")
     analyze_parser.add_argument("-l", "--language", help="Explicit language override")
 
     # report

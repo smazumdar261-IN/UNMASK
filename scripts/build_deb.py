@@ -28,7 +28,7 @@ Section: utils
 Priority: optional
 Architecture: all
 Depends: python3 (>= 3.11)
-Maintainer: UNMASK Team <team@unmask.security>
+Maintainer: Sayantan <sayantan@portfolio.dev>
 Description: UNMASK - Professional Universal Code Deobfuscator & Reverse Engineering Engine
  UNMASK is an extensible, multi-language reverse engineering
  and deobfuscation framework for Python, JavaScript, TypeScript, Java, and Go.
