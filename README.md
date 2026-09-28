@@ -1,30 +1,16 @@
 # UNMASK: Universal Code Deobfuscator & Reverse Engineering Engine
 
 <p align="center">
+  <img src="assets/banner.png" alt="UNMASK :: Universal Code Deobfuscator & Reverse Engineering Engine" width="100%" />
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Developed%20By-Sayantan-00ff66?style=for-the-badge&logo=matrix&logoColor=black" alt="Developed by Sayantan" />
   <img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11+" />
   <img src="https://img.shields.io/badge/Tests-286%20Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests" />
   <img src="https://img.shields.io/badge/Dependencies-Zero%20(Stdlib%20Only)-success?style=for-the-badge" alt="Zero Dependencies" />
   <img src="https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge&logo=gnu&logoColor=white" alt="License: GPLv3" />
 </p>
-
-```text
-           ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
-           ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
-           ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
-           ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
-           ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
-            ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-  ────────────────────────────────────────────────────────────────────────
-      UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool
-                        [ DEVELOPED BY : SAYANTAN ]
-  ────────────────────────────────────────────────────────────────────────
-  :: Target Languages : Python 3.11+ │ JavaScript │ TypeScript │ Java │ Go
-  :: Core Subsystems  : AST Transforms │ CFG De-Flattening │ Opaque Pruner
-  :: Decoders & Crypto: Base64 │ Hex │ URL │ XOR │ Zlib │ Unicode Unpack
-  :: Dynamic Sandbox  : Subprocess POSIX Jail │ CPU & RAM Limits │ Tracing
-  ────────────────────────────────────────────────────────────────────────
-```
 
 ---
 
