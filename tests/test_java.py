@@ -372,6 +372,11 @@ class TestJavaBytecode(unittest.TestCase):
         self.assertEqual(registry.detect_language("Main.class").name, "java-bytecode")
         self.assertEqual(registry.detect_language("archive.jar").name, "java-bytecode")
 
+    def test_bytecode_truncated_file_raises_parse_error(self) -> None:
+        lang = registry.get("java-bytecode")
+        with self.assertRaises(ParseError):
+            lang.parse(b"\xca\xfe\xba\xbe\x00\x00\x00\x34\x00\x02\x03\x01")
+
 
 class TestJavaIRConverter(unittest.TestCase):
     """Test suite for bidirectional Java AST <-> Common IR conversion."""

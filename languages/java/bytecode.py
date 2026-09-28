@@ -75,23 +75,20 @@ class ClassFileReader:
         self.methods: List[Dict[str, Any]] = []
         self._parse()
 
+    def _read_bytes(self, length: int) -> bytes:
+        b = self.stream.read(length)
+        if len(b) < length:
+            raise ParseError(f"Unexpected EOF reading {length} bytes from class file", filename=self.filename)
+        return b
+
     def _read_u1(self) -> int:
-        b = self.stream.read(1)
-        if len(b) < 1:
-            raise ParseError("Unexpected EOF reading class file", filename=self.filename)
-        return b[0]
+        return self._read_bytes(1)[0]
 
     def _read_u2(self) -> int:
-        b = self.stream.read(2)
-        if len(b) < 2:
-            raise ParseError("Unexpected EOF reading class file", filename=self.filename)
-        return struct.unpack(">H", b)[0]
+        return struct.unpack(">H", self._read_bytes(2))[0]
 
     def _read_u4(self) -> int:
-        b = self.stream.read(4)
-        if len(b) < 4:
-            raise ParseError("Unexpected EOF reading class file", filename=self.filename)
-        return struct.unpack(">I", b)[0]
+        return struct.unpack(">I", self._read_bytes(4))[0]
 
     def _parse(self) -> None:
         magic = self._read_u4()
@@ -108,20 +105,20 @@ class ClassFileReader:
             tag = self._read_u1()
             if tag == CONSTANT_Utf8:
                 length = self._read_u2()
-                val_bytes = self.stream.read(length)
+                val_bytes = self._read_bytes(length)
                 self.constant_pool[idx] = (tag, val_bytes.decode("utf-8", errors="replace"))
             elif tag == CONSTANT_Integer:
-                val = struct.unpack(">i", self.stream.read(4))[0]
+                val = struct.unpack(">i", self._read_bytes(4))[0]
                 self.constant_pool[idx] = (tag, val)
             elif tag == CONSTANT_Float:
-                val = struct.unpack(">f", self.stream.read(4))[0]
+                val = struct.unpack(">f", self._read_bytes(4))[0]
                 self.constant_pool[idx] = (tag, val)
             elif tag == CONSTANT_Long:
-                val = struct.unpack(">q", self.stream.read(8))[0]
+                val = struct.unpack(">q", self._read_bytes(8))[0]
                 self.constant_pool[idx] = (tag, val)
                 idx += 1  # 8-byte constants take 2 entries
             elif tag == CONSTANT_Double:
-                val = struct.unpack(">d", self.stream.read(8))[0]
+                val = struct.unpack(">d", self._read_bytes(8))[0]
                 self.constant_pool[idx] = (tag, val)
                 idx += 1
             elif tag == CONSTANT_Class:
@@ -199,7 +196,7 @@ class ClassFileReader:
             name_idx = self._read_u2()
             attr_name = self.get_utf8(name_idx)
             length = self._read_u4()
-            data = self.stream.read(length)
+            data = self._read_bytes(length)
             attrs[attr_name] = data
         return attrs
 
