@@ -694,30 +694,36 @@ def build_parser() -> argparse.ArgumentParser:
 def print_banner(skip_rain: bool = True) -> None:
     """Display the UNMASK ASCII banner and developer attribution."""
     use_color = sys.stdout.isatty()
-    g_hi = "\033[1;92m" if use_color else ""       # Bright phosphor green
-    g_mid = "\033[32m" if use_color else ""        # Standard matrix green
-    g_dim = "\033[2;32m" if use_color else ""      # Dim/dark matrix green
-    c_white = "\033[1;97m" if use_color else ""    # Bright white highlight
-    c_cyan = "\033[96m" if use_color else ""       # Bright cyan
-    c_bold = "\033[1m" if use_color else ""
     c_reset = "\033[0m" if use_color else ""
+    c_bold = "\033[1m" if use_color else ""
+    c_cyan_bright = "\033[1;96m" if use_color else ""
+    c_green_bright = "\033[1;92m" if use_color else ""
+    c_green = "\033[92m" if use_color else ""
+    c_white = "\033[1;97m" if use_color else ""
+    c_cyan = "\033[96m" if use_color else ""
+    c_gold = "\033[38;5;220m" if use_color else ""
+    c_yellow = "\033[1;93m" if use_color else ""
+    c_ts_blue = "\033[38;5;39m" if use_color else ""
+    c_java_orange = "\033[38;5;208m" if use_color else ""
+    c_go_cyan = "\033[38;5;45m" if use_color else ""
+    c_dim_border = "\033[38;5;36m" if use_color else ""
 
-    banner = f"""{g_hi}
-           ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
-           ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
-           ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
-           ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
-           ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
-            ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
-{c_white}      UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool{c_reset}
-{c_cyan}                        [ DEVELOPED BY : SAYANTAN ]{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
-  {g_dim}::{c_reset} {c_bold}Target Languages{c_reset} : {g_mid}Python 3.11+ │ JavaScript │ TypeScript │ Java │ Go{c_reset}
-  {g_dim}::{c_reset} {c_bold}Core Subsystems {c_reset} : {g_mid}AST Transforms │ CFG De-Flattening │ Opaque Pruner{c_reset}
-  {g_dim}::{c_reset} {c_bold}Decoders & Crypto{c_reset}: {g_mid}Base64 │ Hex │ URL │ XOR │ Zlib │ Unicode Unpack{c_reset}
-  {g_dim}::{c_reset} {c_bold}Dynamic Sandbox {c_reset} : {g_mid}Subprocess POSIX Jail │ CPU & RAM Limits │ Tracing{c_reset}
-{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}"""
+    banner = f"""
+           {c_cyan_bright}██╗   ██╗███╗   ██╗███╗   ███╗ {c_green_bright}█████╗ ███████╗██╗  ██╗{c_reset}
+           {c_cyan_bright}██║   ██║████╗  ██║████╗ ████║{c_green_bright}██╔══██╗██╔════╝██║ ██╔╝{c_reset}
+           {c_cyan_bright}██║   ██║██╔██╗ ██║██╔████╔██║{c_green_bright}███████║███████╗█████╔╝ {c_reset}
+           {c_cyan_bright}██║   ██║██║╚██╗██║██║╚██╔╝██║{c_green_bright}██╔══██║╚════██║██╔═██╗ {c_reset}
+           {c_cyan_bright}╚██████╔╝██║ ╚████║██║ ╚═╝ ██║{c_green_bright}██║  ██║███████║██║  ██╗{c_reset}
+            {c_cyan_bright}╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝{c_green_bright}╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝{c_reset}
+{c_dim_border}  ────────────────────────────────────────────────────────────────────────{c_reset}
+      {c_white}UNMASK{c_reset} {c_dim_border}::{c_reset} {c_green_bright}Universal Code Deobfuscator & Reverse Engineering Tool{c_reset}
+                        {c_gold}[ DEVELOPED BY : SAYANTAN ]{c_reset}
+{c_dim_border}  ────────────────────────────────────────────────────────────────────────{c_reset}
+  {c_cyan}::{c_reset} {c_white}Target Languages{c_reset} : {c_yellow}Python 3.11+{c_reset} │ {c_gold}JavaScript{c_reset} │ {c_ts_blue}TypeScript{c_reset} │ {c_java_orange}Java{c_reset} │ {c_go_cyan}Go{c_reset}
+  {c_cyan}::{c_reset} {c_white}Core Subsystems {c_reset} : {c_green}AST Transforms{c_reset} │ {c_green}CFG De-Flattening{c_reset} │ {c_green}Opaque Pruner{c_reset}
+  {c_cyan}::{c_reset} {c_white}Decoders & Crypto{c_reset}: {c_cyan}Base64{c_reset} │ {c_cyan}Hex{c_reset} │ {c_cyan}URL{c_reset} │ {c_cyan}XOR{c_reset} │ {c_cyan}Zlib{c_reset} │ {c_cyan}Unicode Unpack{c_reset}
+  {c_cyan}::{c_reset} {c_white}Dynamic Sandbox {c_reset} : {c_green_bright}Subprocess POSIX Jail{c_reset} │ {c_green_bright}CPU & RAM Limits{c_reset} │ {c_green_bright}Tracing{c_reset}
+{c_dim_border}  ────────────────────────────────────────────────────────────────────────{c_reset}"""
     print(banner)
 
 
