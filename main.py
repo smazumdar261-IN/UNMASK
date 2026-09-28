@@ -633,48 +633,33 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def print_banner(skip_rain: bool = False) -> None:
-    """Display the UNMASK Matrix-themed ASCII banner and digital rain construct."""
+def print_banner(skip_rain: bool = True) -> None:
+    """Display the UNMASK ASCII banner and developer attribution."""
     use_color = sys.stdout.isatty()
     g_hi = "\033[1;92m" if use_color else ""       # Bright phosphor green
     g_mid = "\033[32m" if use_color else ""        # Standard matrix green
     g_dim = "\033[2;32m" if use_color else ""      # Dim/dark matrix green
-    white = "\033[1;97m" if use_color else ""      # Bright white highlight
+    c_white = "\033[1;97m" if use_color else ""    # Bright white highlight
+    c_cyan = "\033[96m" if use_color else ""       # Bright cyan
     c_bold = "\033[1m" if use_color else ""
     c_reset = "\033[0m" if use_color else ""
 
-    if not skip_rain and use_color and sys.stdin.isatty():
-        import random
-        import time
-        rain_chars = "0123456789ABCDEFabcdef!@#$%^&*()_+-=[]{}|;:,.<>?/~"
-        for _ in range(8):
-            line = "".join(random.choice(rain_chars) if random.random() < 0.35 else " " for _ in range(88))
-            colored_line = "".join(
-                f"{white}{c}" if random.random() < 0.1 else f"{g_hi}{c}" if random.random() < 0.4 else f"{g_dim}{c}"
-                for c in line
-            )
-            sys.stdout.write(f"\r{colored_line}{c_reset}\n")
-            sys.stdout.flush()
-            time.sleep(0.015)
-
-    banner = f"""{g_dim}
-   01010100 01001000 01000101 00100000 01001101 01000001 01010100 01010010 01001001 01011000
-{g_mid}  ┌───[ {white}SYSTEM : {g_hi}UNMASK v1.0.0{g_mid} ]───[ {white}DEVELOPED BY : {g_hi}SAYANTAN{g_mid} ]───[ {white}STATUS : {g_hi}ACTIVE{g_mid} ]─────────┐
-{g_dim}  │ 01  10  00  11  01  10  00  11  01  10  00  11  01  10  00  11  01  10  00  11  01  10   │
-{g_hi}  │  ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗   {g_dim}01010100 01001000 01000101{g_hi}     │
-  │  ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝   {g_dim}01001101 01000001 01010100{g_hi}     │
-  │  ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝    {white}>> WAKE UP, OPERATOR...{g_hi}        │
-  │  ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗    {white}>> DEVELOPED BY SAYANTAN{g_hi}       │
-  │  ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗   {g_dim}01000100 01000101 01001111{g_hi}     │
-  │   ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   {g_dim}01000010 01000110 00100001{g_hi}     │
-{g_dim}  │ 10  01  11  00  10  01  11  00  10  01  11  00  10  01  11  00  10  01  11  00  10  01   │
-{g_mid}  └───[ {g_hi}UNIVERSAL CODE REVERSE ENGINEERING & DEOBFUSCATION CONSTRUCT{g_mid} ]───────────────────────┘{c_reset}
-{g_dim}  ::{g_hi} [DEVELOPER]  {c_reset}: {g_mid}Sayantan{c_reset}
-{g_dim}  ::{g_hi} [TARGETS]    {c_reset}: {g_mid}Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java & Bytecode │ Go{c_reset}
-{g_dim}  ::{g_hi} [SUBSYSTEMS] {c_reset}: {g_mid}Control-Flow De-Flattening │ Opaque Branch Pruner │ Symbolic Algebra{c_reset}
-{g_dim}  ::{g_hi} [DECODERS]   {c_reset}: {g_mid}Base64 │ Hex │ URL │ XOR Multi-Byte │ Zlib/Gzip │ Unicode Unpack{c_reset}
-{g_dim}  ::{g_hi} [SANDBOX]    {c_reset}: {g_mid}Subprocess POSIX Jails │ CPU/Memory rlimits │ Step-Capped Tracing{c_reset}
-{g_dim}  ----------------------------------------------------------------------------------------{c_reset}"""
+    banner = f"""{g_hi}
+   ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
+   ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
+   ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
+   ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
+   ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
+    ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝{c_reset}
+{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
+{c_white}     UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool{c_reset}
+{c_cyan}                   [ DEVELOPED BY : SAYANTAN ]{c_reset}
+{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}
+  {g_dim}::{c_reset} {c_bold}Target Languages{c_reset} : {g_mid}Python 3.11+ │ JavaScript (ES2024) │ TypeScript │ Java │ Go{c_reset}
+  {g_dim}::{c_reset} {c_bold}Core Subsystems {c_reset} : {g_mid}AST Simplification │ Control-Flow De-Flattening │ Opaque Pruning{c_reset}
+  {g_dim}::{c_reset} {c_bold}Decoders & Crypto{c_reset}: {g_mid}Base64 │ Hex │ URL │ Multi-Byte XOR │ Zlib/Gzip │ Unicode Unpack{c_reset}
+  {g_dim}::{c_reset} {c_bold}Dynamic Sandbox {c_reset} : {g_mid}Subprocess POSIX Jail │ CPU & RAM Limits │ Step-Capped Tracing{c_reset}
+{g_dim}  ────────────────────────────────────────────────────────────────────────{c_reset}"""
     print(banner)
 
 
@@ -688,6 +673,14 @@ def interactive_menu() -> int:
     c_bold = "\033[1m" if use_color else ""
     c_dim = "\033[2m" if use_color else ""
     c_reset = "\033[0m" if use_color else ""
+
+    op_names = {
+        "1": "Deobfuscate Payload",
+        "2": "Static Analysis",
+        "3": "Syntax & AST Dump",
+        "4": "Common IR Tools",
+        "5": "Detect Language",
+    }
 
     while True:
         print(f"\n{c_bold}{c_green}[ CORE OPERATIONS ]{c_reset}")
@@ -708,16 +701,61 @@ def interactive_menu() -> int:
             print("\n[*] Exiting UNMASK. Goodbye!")
             return 0
 
-        if choice not in ("1", "2", "3", "4", "5"):
+        if choice not in op_names:
             print("[!] Invalid option. Please enter a number between 1 and 6.")
             continue
 
+        op_name = op_names[choice]
+        print(f"\n{c_bold}{c_cyan}[*] Selected Operation [{choice}]: {op_name}{c_reset}")
+        print(f"  {c_cyan}[1]{c_reset} Proceed with operation on target file")
+        print(f"  {c_cyan}[2]{c_reset} 🔄 Revert file changes (Restore from .unmask.bak backup)")
+        print(f"  {c_cyan}[0]{c_reset} ↩️  Change operation / Return to main menu\n")
+
         try:
-            raw_path = input(f"{c_bold}[?] Target file path:{c_reset} ").strip()
-            if (raw_path.startswith('"') and raw_path.endswith('"')) or (raw_path.startswith("'") and raw_path.endswith("'")):
-                raw_path = raw_path[1:-1]
+            action = input(f"{c_bold}[?] Enter choice [1/2/0, default: 1] or file path:{c_reset} ").strip()
+            if (action.startswith('"') and action.endswith('"')) or (action.startswith("'") and action.endswith("'")):
+                action = action[1:-1]
         except (KeyboardInterrupt, EOFError):
             continue
+
+        if action in ("0", "b", "back", "cancel", "q"):
+            print(f"{c_dim}[*] Operation changed. Returning to main menu...{c_reset}")
+            continue
+
+        if action in ("2", "r", "revert"):
+            try:
+                rev_path = input(f"{c_bold}[?] Path of file to revert:{c_reset} ").strip()
+                if (rev_path.startswith('"') and rev_path.endswith('"')) or (rev_path.startswith("'") and rev_path.endswith("'")):
+                    rev_path = rev_path[1:-1]
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if not rev_path:
+                print("[!] Error: No file path provided.")
+                continue
+            bak_path = Path(f"{rev_path}.unmask.bak")
+            target_p = Path(rev_path)
+            if bak_path.exists():
+                import shutil
+                shutil.copy2(bak_path, target_p)
+                print(f"{c_bold}{c_green}[+] Successfully reverted '{target_p.name}' from '{bak_path.name}'.{c_reset}")
+                print(f"{c_dim}[*] Original contents restored.{c_reset}")
+            else:
+                print(f"[!] No backup file '{bak_path.name}' found for '{target_p.name}'.")
+                print(f"    (If the file was not overwritten, its original state is already preserved.)")
+            continue
+
+        if action in ("1", ""):
+            try:
+                raw_path = input(f"{c_bold}[?] Target file path (or '0' to change operation):{c_reset} ").strip()
+                if (raw_path.startswith('"') and raw_path.endswith('"')) or (raw_path.startswith("'") and raw_path.endswith("'")):
+                    raw_path = raw_path[1:-1]
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if raw_path in ("0", "b", "back", "cancel", "q"):
+                print(f"{c_dim}[*] Operation cancelled. Returning to main menu...{c_reset}")
+                continue
+        else:
+            raw_path = action
 
         if not raw_path:
             print("[!] Error: No target file path provided.")
@@ -725,9 +763,6 @@ def interactive_menu() -> int:
 
         if choice == "1":
             try:
-                out_path = input(f"{c_bold}[?] Output file path (leave blank for terminal display):{c_reset} ").strip()
-                if (out_path.startswith('"') and out_path.endswith('"')) or (out_path.startswith("'") and out_path.endswith("'")):
-                    out_path = out_path[1:-1]
                 conf = input(f"{c_bold}[?] Display confidence score? [Y/n]:{c_reset} ").strip().lower() != "n"
                 rep = input(f"{c_bold}[?] Display transformation audit report? [y/N]:{c_reset} ").strip().lower() == "y"
                 dyn = input(f"{c_bold}[?] Enable isolated dynamic sandbox? [y/N]:{c_reset} ").strip().lower() == "y"
@@ -735,8 +770,6 @@ def interactive_menu() -> int:
                 continue
 
             cmd_args = ["deobfuscate", raw_path]
-            if out_path:
-                cmd_args.extend(["-o", out_path])
             if conf:
                 cmd_args.append("--confidence")
             if rep:
@@ -746,12 +779,61 @@ def interactive_menu() -> int:
 
             print(f"\n{c_bold}{c_cyan}[*] Executing multi-pass deobfuscation on: {raw_path}{c_reset}")
             main(cmd_args)
-            print(f"{c_bold}{c_green}[+] Operation completed.{c_reset}")
+            print(f"\n{c_bold}{c_green}[+] Deobfuscation preview completed.{c_reset}")
+            print(f"  {c_cyan}[1]{c_reset} 💾 Save clean output to a file")
+            print(f"  {c_cyan}[2]{c_reset} 🔄 Revert / Discard changes (Keep original file untouched)")
+            print(f"  {c_cyan}[3]{c_reset} ↩️  Change operation / Return to main menu\n")
+            try:
+                post_action = input(f"{c_bold}[?] Select action [1/2/3, default: 3]:{c_reset} ").strip()
+            except (KeyboardInterrupt, EOFError):
+                continue
+
+            if post_action == "1":
+                save_path = input(f"{c_bold}[?] Save output to file path (e.g. {raw_path}.clean.py):{c_reset} ").strip()
+                if (save_path.startswith('"') and save_path.endswith('"')) or (save_path.startswith("'") and save_path.endswith("'")):
+                    save_path = save_path[1:-1]
+                if save_path:
+                    if Path(save_path).resolve() == Path(raw_path).resolve():
+                        bak = Path(f"{raw_path}.unmask.bak")
+                        import shutil
+                        shutil.copy2(raw_path, bak)
+                        print(f"{c_dim}[*] Created backup '{bak.name}' before overwriting.{c_reset}")
+                    main(["deobfuscate", raw_path, "-o", save_path])
+                    print(f"{c_bold}{c_green}[+] Deobfuscated file written to '{save_path}'.{c_reset}")
+            elif post_action == "2":
+                bak = Path(f"{raw_path}.unmask.bak")
+                if bak.exists():
+                    import shutil
+                    shutil.copy2(bak, raw_path)
+                    print(f"{c_bold}{c_green}[+] Restored '{raw_path}' from backup.{c_reset}")
+                else:
+                    print(f"{c_bold}{c_cyan}[*] Changes discarded. Original file '{raw_path}' remains untouched.{c_reset}")
+            else:
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
 
         elif choice == "2":
             print(f"\n{c_bold}{c_cyan}[*] Executing static analysis on: {raw_path}{c_reset}")
             main(["analyze", raw_path])
-            print(f"{c_bold}{c_green}[+] Analysis completed.{c_reset}")
+            print(f"\n{c_bold}{c_green}[+] Static analysis completed.{c_reset}")
+            print(f"  {c_cyan}[1]{c_reset} 🔍 Analyze another file")
+            print(f"  {c_cyan}[2]{c_reset} 🔄 Revert file from backup (.unmask.bak)")
+            print(f"  {c_cyan}[3]{c_reset} ↩️  Change operation / Return to main menu\n")
+            try:
+                post = input(f"{c_bold}[?] Select action [1/2/3, default: 3]:{c_reset} ").strip()
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if post == "2":
+                bak = Path(f"{raw_path}.unmask.bak")
+                if bak.exists():
+                    import shutil
+                    shutil.copy2(bak, raw_path)
+                    print(f"{c_bold}{c_green}[+] Restored '{raw_path}' from '{bak.name}'.{c_reset}")
+                else:
+                    print(f"{c_dim}[*] Original file '{raw_path}' is untouched. No backup found.{c_reset}")
+            elif post == "1":
+                pass
+            else:
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
 
         elif choice == "3":
             try:
@@ -768,29 +850,101 @@ def interactive_menu() -> int:
 
             print(f"\n{c_bold}{c_cyan}[*] Parsing and validating: {raw_path}{c_reset}")
             main(cmd_args)
-            print(f"{c_bold}{c_green}[+] Parsing completed.{c_reset}")
+            print(f"\n{c_bold}{c_green}[+] Syntax parsing completed.{c_reset}")
+            print(f"  {c_cyan}[1]{c_reset} 💾 Save clean unparsed code to a file")
+            print(f"  {c_cyan}[2]{c_reset} 🔄 Revert file from backup (.unmask.bak)")
+            print(f"  {c_cyan}[3]{c_reset} ↩️  Change operation / Return to main menu\n")
+            try:
+                post = input(f"{c_bold}[?] Select action [1/2/3, default: 3]:{c_reset} ").strip()
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if post == "1":
+                save_path = input(f"{c_bold}[?] Save output to file path:{c_reset} ").strip()
+                if (save_path.startswith('"') and save_path.endswith('"')) or (save_path.startswith("'") and save_path.endswith("'")):
+                    save_path = save_path[1:-1]
+                if save_path:
+                    if Path(save_path).resolve() == Path(raw_path).resolve():
+                        bak = Path(f"{raw_path}.unmask.bak")
+                        import shutil
+                        shutil.copy2(raw_path, bak)
+                        print(f"{c_dim}[*] Created backup '{bak.name}' before overwriting.{c_reset}")
+                    main(["parse", raw_path, "--unparse", "-o", save_path])
+                    print(f"{c_bold}{c_green}[+] Clean unparsed source written to '{save_path}'.{c_reset}")
+            elif post == "2":
+                bak = Path(f"{raw_path}.unmask.bak")
+                if bak.exists():
+                    import shutil
+                    shutil.copy2(bak, raw_path)
+                    print(f"{c_bold}{c_green}[+] Restored '{raw_path}' from '{bak.name}'.{c_reset}")
+                else:
+                    print(f"{c_dim}[*] Original file '{raw_path}' is untouched. No backup found.{c_reset}")
+            else:
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
 
         elif choice == "4":
+            print(f"\n{c_bold}{c_cyan}[*] Common IR Tools Submenu:{c_reset}")
             print("  [a] Optimize Common IR & dump")
             print("  [b] Render ASCII Control Flow Graph (CFG)")
             print("  [c] Roundtrip from Common IR back to source")
+            print("  [0] ↩️  Change operation / Return to main menu\n")
             try:
-                ir_opt = input(f"{c_bold}[?] Select IR operation [a/b/c, default: a]:{c_reset} ").strip().lower()
+                ir_opt = input(f"{c_bold}[?] Select IR operation [a/b/c/0, default: a]:{c_reset} ").strip().lower()
             except (KeyboardInterrupt, EOFError):
                 continue
 
-            if ir_opt == "b":
+            if ir_opt in ("0", "d", "back", "cancel", "q"):
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
+                continue
+            elif ir_opt == "b":
                 main(["ir", raw_path, "--cfg"])
             elif ir_opt == "c":
                 main(["ir", raw_path, "--roundtrip"])
             else:
                 main(["ir", raw_path, "-O"])
-            print(f"{c_bold}{c_green}[+] IR processing completed.{c_reset}")
+
+            print(f"\n{c_bold}{c_green}[+] IR processing completed.{c_reset}")
+            print(f"  {c_cyan}[1]{c_reset} 💾 Save IR / roundtrip output to file")
+            print(f"  {c_cyan}[2]{c_reset} 🔄 Revert file from backup (.unmask.bak)")
+            print(f"  {c_cyan}[3]{c_reset} ↩️  Change operation / Return to main menu\n")
+            try:
+                post = input(f"{c_bold}[?] Select action [1/2/3, default: 3]:{c_reset} ").strip()
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if post == "1":
+                save_path = input(f"{c_bold}[?] Save output to file path:{c_reset} ").strip()
+                if (save_path.startswith('"') and save_path.endswith('"')) or (save_path.startswith("'") and save_path.endswith("'")):
+                    save_path = save_path[1:-1]
+                if save_path:
+                    if ir_opt == "c":
+                        main(["ir", raw_path, "--roundtrip", "-o", save_path])
+                    else:
+                        main(["ir", raw_path, "-O", "-o", save_path])
+                    print(f"{c_bold}{c_green}[+] IR output written to '{save_path}'.{c_reset}")
+            elif post == "2":
+                bak = Path(f"{raw_path}.unmask.bak")
+                if bak.exists():
+                    import shutil
+                    shutil.copy2(bak, raw_path)
+                    print(f"{c_bold}{c_green}[+] Restored '{raw_path}' from '{bak.name}'.{c_reset}")
+                else:
+                    print(f"{c_dim}[*] Original file '{raw_path}' is untouched. No backup found.{c_reset}")
+            else:
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
 
         elif choice == "5":
             print(f"\n{c_bold}{c_cyan}[*] Scanning language signatures on: {raw_path}{c_reset}")
             main(["detect", raw_path])
-            print(f"{c_bold}{c_green}[+] Detection completed.{c_reset}")
+            print(f"\n{c_bold}{c_green}[+] Detection completed.{c_reset}")
+            print(f"  {c_cyan}[1]{c_reset} 🏷️  Detect another file")
+            print(f"  {c_cyan}[2]{c_reset} ↩️  Change operation / Return to main menu\n")
+            try:
+                post = input(f"{c_bold}[?] Select action [1/2, default: 2]:{c_reset} ").strip()
+            except (KeyboardInterrupt, EOFError):
+                continue
+            if post == "1":
+                pass
+            else:
+                print(f"{c_dim}[*] Returning to main menu.{c_reset}")
 
 
 def main(argv: Optional[list] = None) -> int:
