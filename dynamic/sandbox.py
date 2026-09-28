@@ -17,7 +17,10 @@ import builtins
 import io
 import multiprocessing
 import os
-import resource
+try:
+    import resource
+except ImportError:
+    resource = None
 import sys
 import tempfile
 import time
@@ -57,33 +60,34 @@ def _worker_process_target(
     temp_dir: str,
 ) -> None:
     """Worker function executed inside the isolated child process."""
-    # 1. Apply OS resource limits
-    try:
-        # Max CPU time
-        cpu_limit = max(1, int(policy.max_cpu_time_seconds))
-        resource.setrlimit(resource.RLIMIT_CPU, (cpu_limit, cpu_limit + 1))
-    except (ValueError, resource.error):
-        pass
+    # 1. Apply OS resource limits (POSIX systems)
+    if resource is not None:
+        try:
+            # Max CPU time
+            cpu_limit = max(1, int(policy.max_cpu_time_seconds))
+            resource.setrlimit(resource.RLIMIT_CPU, (cpu_limit, cpu_limit + 1))
+        except (ValueError, getattr(resource, "error", OSError), AttributeError):
+            pass
 
-    try:
-        # Max Virtual Memory (RLIMIT_AS)
-        mem_limit = policy.max_memory_bytes
-        resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
-    except (ValueError, resource.error):
-        pass
+        try:
+            # Max Virtual Memory (RLIMIT_AS)
+            mem_limit = policy.max_memory_bytes
+            resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
+        except (ValueError, getattr(resource, "error", OSError), AttributeError):
+            pass
 
-    try:
-        # Disallow writing to files: max file size = 0
-        if not policy.allow_filesystem_write:
-            resource.setrlimit(resource.RLIMIT_FSIZE, (0, 0))
-    except (ValueError, resource.error):
-        pass
+        try:
+            # Disallow writing to files: max file size = 0
+            if not policy.allow_filesystem_write:
+                resource.setrlimit(resource.RLIMIT_FSIZE, (0, 0))
+        except (ValueError, getattr(resource, "error", OSError), AttributeError):
+            pass
 
-    try:
-        # Disallow core dumps
-        resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
-    except (ValueError, resource.error):
-        pass
+        try:
+            # Disallow core dumps
+            resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+        except (ValueError, getattr(resource, "error", OSError), AttributeError):
+            pass
 
     # 2. Filesystem & Environment Isolation
     try:

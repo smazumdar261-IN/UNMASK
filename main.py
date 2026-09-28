@@ -24,6 +24,14 @@ import languages.typescript  # Ensure TypeScript language is registered
 import languages.java  # Ensure Java and Java Bytecode languages are registered
 import languages.go  # Ensure Go language is registered
 
+# Enable ANSI virtual terminal colors on Windows 10/11 console
+if sys.platform == "win32":
+    try:
+        import os
+        os.system("")
+    except Exception:
+        pass
+
 
 def setup_logging(verbose: bool = False, debug: bool = False) -> None:
     """Configure structured logging based on verbosity flags."""
