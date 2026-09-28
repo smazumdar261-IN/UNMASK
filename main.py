@@ -694,8 +694,8 @@ def interactive_menu() -> int:
         print(f"  {c_cyan}[1]{c_reset} ⚡ {c_bold}Deobfuscate Payload{c_reset}      (Unpack, decode strings, simplify logic)")
         print(f"  {c_cyan}[2]{c_reset} 🔍 {c_bold}Static Analysis{c_reset}          (Inspect obfuscation patterns & metrics)")
         print(f"  {c_cyan}[3]{c_reset} ⚙️  {c_bold}Syntax & AST Dump{c_reset}        (Validate grammar, view AST / clean code)")
-        print(f"  {c_cyan}[4]{c_reset} 🔄 {c_bold}Common IR Tools{c_reset}          (Universal IR optimization / CFG graph)")
-        print(f"  {c_cyan}[5]{c_reset} 🎯 {c_bold}Detect Language{c_reset}          (Analyze file signatures & headers)")
+        print(f"  {c_cyan}[4]{c_reset} 🛠️  {c_bold}Common IR Tools{c_reset}          (Universal IR optimization / CFG graph)")
+        print(f"  {c_cyan}[5]{c_reset} 🌐 {c_bold}Detect Language{c_reset}          (Analyze file signatures & headers)")
         print(f"  {c_cyan}[6]{c_reset} ❌ {c_bold}Terminate Session{c_reset}\n")
 
         try:
