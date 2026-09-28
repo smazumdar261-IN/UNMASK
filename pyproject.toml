@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unmask"
+version = "1.0.0"
+description = "UNMASK: Professional Multi-Language Code Deobfuscator & Reverse Engineering Engine"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Sayantan" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+    "Topic :: Software Development :: Compilers",
+]
+
+[project.scripts]
+unmask = "main:main"
+deobfuscator = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["core*", "languages*", "passes*", "decoders*", "analysis*", "printers*", "dynamic*"]
