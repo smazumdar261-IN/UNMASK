@@ -7,7 +7,7 @@ name = "unmask"
 version = "1.0.0"
 description = "UNMASK: Professional Multi-Language Code Deobfuscator & Reverse Engineering Engine"
 readme = "README.md"
-license = { text = "MIT" }
+license = { text = "GPL-3.0-or-later" }
 requires-python = ">=3.11"
 authors = [
     { name = "Sayantan" }
@@ -19,6 +19,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Security",
     "Topic :: Software Development :: Compilers",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
 ]
 
 [project.scripts]

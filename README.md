@@ -5,16 +5,16 @@
   <img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11+" />
   <img src="https://img.shields.io/badge/Tests-286%20Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests" />
   <img src="https://img.shields.io/badge/Dependencies-Zero%20(Stdlib%20Only)-success?style=for-the-badge" alt="Zero Dependencies" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge&logo=gnu&logoColor=white" alt="License: GPLv3" />
 </p>
 
 ```text
-     .-------.     ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
-    /  01 10  \    ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
-   |  [o] [o]  |   ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
-   |   01/\10  |   ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
-    \  `==='  /    ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
-     `-------'      ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+           ██╗   ██╗███╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
+           ██║   ██║████╗  ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
+           ██║   ██║██╔██╗ ██║██╔████╔██║███████║███████╗█████╔╝ 
+           ██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══██║╚════██║██╔═██╗ 
+           ╚██████╔╝██║ ╚████║██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
+            ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
   ────────────────────────────────────────────────────────────────────────
       UNMASK :: Universal Code Deobfuscator & Reverse Engineering Tool
                         [ DEVELOPED BY : SAYANTAN ]
@@ -207,4 +207,4 @@ unmask
 
 * **Developer:** **Sayantan**
 * **Project:** UNMASK (Universal Deobfuscator Framework)
-* **License:** [MIT License](LICENSE)
+* **License:** [GNU General Public License v3.0 (GPLv3)](LICENSE)
